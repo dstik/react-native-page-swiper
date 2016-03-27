@@ -75,6 +75,16 @@ export default class Swiper extends Component {
     })
   }
 
+  componentDidMount() {
+    let newIndex = this.state.index
+    if (newIndex != null) {
+      let pageNumber = Math.max(0, Math.min(newIndex, this.props.children.length - 1));
+      this.setState({
+        scrollValue: Animated.Value(pageNumber);
+      });
+    }
+  }
+
   goToPage(pageNumber) {
     // Don't scroll outside the bounds of the screens
     pageNumber = Math.max(0, Math.min(pageNumber, this.props.children.length - 1))
